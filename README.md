@@ -13,6 +13,13 @@ a mouse.
 [1]. Fast and Robust Hand Tracking Using Detection-Guided Optimization, In CVPR, 2015.     
 [2]. Accurate, Robust, and Flexible Real-time Hand Tracking, In CHI, 2015.      
 [3]. Full DOF tracking of a hand interaction with an object by modeling occlusions and physical constraints, In ICCV, 2011.     
+
+# Corresponding Video Links
+http://v.youku.com/v_show/id_XNzk2NDM4NDIw.html?from=s1.8-1-1.2 
+https://www.youtube.com/watch?v=FNQbGJyGAs8 (YouTube video) 
+https://www.youtube.com/watch?v=xML2S6bvMwI(YouTube video) 
+https://www.youtube.com/watch?v=eXktGa16yXk (YouTube video) 
+https://www.youtube.com/watch?v=N3ffgj1bBGw (YouTube video)
 # Time Line
 1 Creat github homepage
 # To Do List
