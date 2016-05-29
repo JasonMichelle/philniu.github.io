@@ -7,13 +7,13 @@ of the hands/fingers of the user and hence represent objects in 3D. In addition
 to that, the hand/finger tracking technique is used as a tool of the computer, 
 acting as an external device in our computer, similar to a keyboard and 
 a mouse.      
-# Time Line
-1.Creat github homepage
-2.Android环境搭建      
+# Time Line      
+1.Creat github homepage                 
+2.Android环境搭建                 
 # To Do List
-1.分配任务，创建项目链接       
-2.Android环境搭建
-3.阅读参考文献，寻找合适算法，确定待实现方案   
+1.分配任务，创建项目链接                     
+2.Android环境搭建           
+3.阅读参考文献，寻找合适算法，确定待实现方案             
 
 # Reference
 [1]. Fast and Robust Hand Tracking Using Detection-Guided Optimization, In CVPR, 2015.     
@@ -27,7 +27,7 @@ https://www.youtube.com/watch?v=xML2S6bvMwI(YouTube video)
 https://www.youtube.com/watch?v=eXktGa16yXk (YouTube video)     
 https://www.youtube.com/watch?v=N3ffgj1bBGw (YouTube video)    
 
-# Android环境搭建
+# UPDATE2：Android环境搭建
 随着移动互联网的火热发展和移动端迅速崛起，Android的应用开发和IOS应用开发是非常有必要了解学习的。
 本文就是为了从最基本的开始介绍Android开发。在整个文档中，我会简单介绍环境搭建、最小案例演示、JNI开发和集成OpenCV。      
 **工具**        
