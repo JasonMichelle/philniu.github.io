@@ -39,11 +39,11 @@ https://www.youtube.com/watch?v=N3ffgj1bBGw (YouTube video)
 下载地址：http://www.oracle.com/technetwork/java/javase/downloads/index.html
 环境配置，截图如下：   
 JAVA_HOME   
-![](C:\Users\Administrator\Desktop\Android pictures\1.png)
+![](https://github.com/philniu/philniu.github.io/blob/master/1.png)     
 PATH   
-![](C:\Users\Administrator\Desktop\Android pictures\2.png)
+![](https://github.com/philniu/philniu.github.io/blob/master/2.png)
 CLASSPATH    
-![](C:\Users\Administrator\Desktop\Android pictures\3.png)        
+![](https://github.com/philniu/philniu.github.io/blob/master/3.png)        
 Win+R，输入cmd，输入java 和 javac 检测环境是否配置成功。成功的话会出现很多输出      
 
 2. Eclipse下载安装     
@@ -60,19 +60,19 @@ Win+R，输入cmd，输入java 和 javac 检测环境是否配置成功。成功
 4. Android SDK和NDK配置     
 打开Eclipse，设置工作空间。      
 Window—>Preference看如下截图：     
-![](C:\Users\Administrator\Desktop\Android pictures\4.png)       
-![](C:\Users\Administrator\Desktop\Android pictures\5.png)           
+![](https://github.com/philniu/philniu.github.io/blob/master/4.png)        
+![](https://github.com/philniu/philniu.github.io/blob/master/5.png)          
 
 5. 配置OpenCV-2.4.11   
 下载地址：http://opencv.org/downloads.html    
 选择相应的版本。    
 解压文件，然后把文件里面的一个名叫sdk的文件夹复制到工作空间。        
 然后，导入这个sdk项目到Eclipse作为一个library。      
-![](C:\Users\Administrator\Desktop\Android pictures\6.png)        
-![](C:\Users\Administrator\Desktop\Android pictures\7.png)     
+![](https://github.com/philniu/philniu.github.io/blob/master/6.png)       
+![](https://github.com/philniu/philniu.github.io/blob/master/7.png)       
 
 6. 创建一个简单地使用OPenCV的本地代码实现图片灰度化的项目。 
-![](C:\Users\Administrator\Desktop\Android pictures\8.png)       
+![](https://github.com/philniu/philniu.github.io/blob/master/8.png)        
 
 7. 备注    
 后续更新，敬请期待。     
