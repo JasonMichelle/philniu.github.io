@@ -34,13 +34,15 @@ a mouse.      </p>
 <h1>
 <a id="time-line" class="anchor" href="#time-line" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Time Line</h1>
 
-<p>1.Creat github homepage</p>
+<p>1.Creat github homepage
+2.Android环境搭建      </p>
 
 <h1>
 <a id="to-do-list" class="anchor" href="#to-do-list" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>To Do List</h1>
 
 <p>1.分配任务，创建项目链接<br>
-2.阅读参考文献，寻找合适算法，确定待实现方案   </p>
+2.Android环境搭建
+3.阅读参考文献，寻找合适算法，确定待实现方案   </p>
 
 <h1>
 <a id="reference" class="anchor" href="#reference" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Reference</h1>
@@ -57,6 +59,60 @@ a mouse.      </p>
 <a href="https://www.youtube.com/watch?v=xML2S6bvMwI(YouTube">https://www.youtube.com/watch?v=xML2S6bvMwI(YouTube</a> video)<br>
 <a href="https://www.youtube.com/watch?v=eXktGa16yXk">https://www.youtube.com/watch?v=eXktGa16yXk</a> (YouTube video)<br>
 <a href="https://www.youtube.com/watch?v=N3ffgj1bBGw">https://www.youtube.com/watch?v=N3ffgj1bBGw</a> (YouTube video)    </p>
+
+<h1>
+<a id="android环境搭建" class="anchor" href="#android%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Android环境搭建</h1>
+
+<p>随着移动互联网的火热发展和移动端迅速崛起，Android的应用开发和IOS应用开发是非常有必要了解学习的。
+本文就是为了从最基本的开始介绍Android开发。在整个文档中，我会简单介绍环境搭建、最小案例演示、JNI开发和集成OpenCV。<br>
+<strong>工具</strong><br>
+⒈JDK<br>
+⒉Eclipse<br>
+⒊Android SDK<br>
+⒋Android NDK<br>
+⒌OpenCV-2.4.11的AndroidSDK      </p>
+
+<p><strong>1. JDK安装和Java环境配置</strong><br>
+下载地址：<a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">http://www.oracle.com/technetwork/java/javase/downloads/index.html</a>
+环境配置，截图如下：<br>
+JAVA_HOME<br>
+<img src="https://github.com/philniu/philniu.github.io/blob/master/1.png" alt=""><br>
+PATH<br>
+<img src="https://github.com/philniu/philniu.github.io/blob/master/2.png" alt=""><br>
+CLASSPATH<br>
+<img src="https://github.com/philniu/philniu.github.io/blob/master/3.png" alt=""><br>
+Win+R，输入cmd，输入java 和 javac 检测环境是否配置成功。成功的话会出现很多输出      </p>
+
+<p><strong>2. Eclipse下载安装</strong><br>
+下载地址：<a href="http://www.eclipse.org/downloads/">http://www.eclipse.org/downloads/</a><br>
+选择适用于Android开发的IDE<br>
+然后像普通的windows软件一样的安装。图片就不截了。    </p>
+
+<p><strong>3. Android相关下载</strong><br>
+在这里，我不得不说一句。墙内的我们，学个开发就这么难吗？<br>
+还有国内有个不错的论坛，所有android需要的都可以去那里下载：<br>
+网址：<a href="http://www.apkbus.com/thread-252748-1-1.html">http://www.apkbus.com/thread-252748-1-1.html</a><br>
+还有就是，作为新手。我建议，直接下载我给的网址里面的一个名叫ADT Bundle的文件，也就是说不需要去进行第二步。下载完成以后，解压就可以直接使用。不过，这个集成好的里面的Android版本不是最新的，并且如果想更新的话也是相当的麻烦。个人建议不要更新。凑合用，等理解深刻了，完整的走一趟安装流程。     </p>
+
+<p><strong>4. Android SDK和NDK配置</strong><br>
+打开Eclipse，设置工作空间。<br>
+Window—&gt;Preference看如下截图：<br>
+<img src="https://github.com/philniu/philniu.github.io/blob/master/4.png" alt=""><br>
+<img src="https://github.com/philniu/philniu.github.io/blob/master/5.png" alt="">                        </p>
+
+<p><strong>5. 配置OpenCV-2.4.11</strong><br>
+下载地址：<a href="http://opencv.org/downloads.html">http://opencv.org/downloads.html</a><br>
+选择相应的版本。<br>
+解压文件，然后把文件里面的一个名叫sdk的文件夹复制到工作空间。<br>
+然后，导入这个sdk项目到Eclipse作为一个library。<br>
+<img src="https://github.com/philniu/philniu.github.io/blob/master/6.png" alt=""><br>
+<img src="https://github.com/philniu/philniu.github.io/blob/master/7.png" alt="">                 </p>
+
+<p><strong>6. 创建一个简单地使用OPenCV的本地代码实现图片灰度化的项目。</strong><br>
+<img src="https://github.com/philniu/philniu.github.io/blob/master/8.png" alt="">                                                 </p>
+
+<p><strong>7. 备注</strong><br>
+后续更新，敬请期待。                </p>
 
       <footer class="site-footer">
 
