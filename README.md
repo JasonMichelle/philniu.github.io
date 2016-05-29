@@ -71,11 +71,11 @@ Window—>Preference看如下截图：
 ![](https://github.com/philniu/philniu.github.io/blob/master/6.png)              
 ![](https://github.com/philniu/philniu.github.io/blob/master/7.png)                 
 
-6. 创建一个简单地使用OPenCV的本地代码实现图片灰度化的项目。 
-![](https://github.com/philniu/philniu.github.io/blob/master/8.png)                    
+6. 创建一个简单地使用OPenCV的本地代码实现图片灰度化的项目。                  
+![](https://github.com/philniu/philniu.github.io/blob/master/8.png)                                                 
 
-7. 备注    
-后续更新，敬请期待。     
+7. 备注               
+后续更新，敬请期待。                
 
        
 
