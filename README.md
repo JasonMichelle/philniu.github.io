@@ -84,11 +84,14 @@ Window—>Preference看如下截图：
 完成的效果如下图：（本来是一个动画，但是手机运行之后，录制动画太麻烦，就弄一组图算了）   
 ![](https://github.com/philniu/philniu.github.io/tree/master/update3Images/1.png)  
 
-**项目架构截图：**
+**项目架构截图：**  
 ![](https://github.com/philniu/philniu.github.io/tree/master/update3Images/2.png)  
 
-**代码**  
-1、完成3D立方体的绘制，代码注释    
+**代码**   
+
+1、完成3D立方体的绘制，代码注释  
+             
+//
 package com.hust.dj3dstudy;
 
 import java.nio.ByteBuffer;
@@ -213,8 +216,11 @@ public class CubeRenderer implements Renderer {
 		xrot += 1.0f;
 		yrot += 0.5f;
 	}
-}
-2、主页显示     
+}  
+
+2、主页显示 
+                                      
+//
 package com.hust.dj3dstudy;
 
 import android.app.Activity;
