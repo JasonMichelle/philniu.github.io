@@ -82,10 +82,10 @@ Window—>Preference看如下截图：
 
 打开Eclipse，创建一个项目，取名Dj3DStudy001，采用Android5.1，也就是Android API 22版本。向下兼容到Android API 14. 
 完成的效果如下图：（本来是一个动画，但是手机运行之后，录制动画太麻烦，就弄一组图算了）   
-https://github.com/philniu/philniu.github.io/tree/master/update3Images/1.png     
+![](https://github.com/philniu/philniu.github.io/tree/master/update3Images/1.png)  
 
 **项目架构截图：**
-https://github.com/philniu/philniu.github.io/tree/master/update3Images/2.png       
+![](https://github.com/philniu/philniu.github.io/tree/master/update3Images/2.png)  
 
 **代码**  
 1、完成3D立方体的绘制，代码注释    
