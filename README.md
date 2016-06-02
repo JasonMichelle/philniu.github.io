@@ -71,9 +71,9 @@ Window—>Preference看如下截图：
 解压文件，然后把文件里面的一个名叫sdk的文件夹复制到工作空间。        
 然后，导入这个sdk项目到Eclipse作为一个library。      
 ![](https://github.com/philniu/philniu.github.io/tree/master/Android%20pictures/6.png)                            
-![](https://github.com/philniu/philniu.github.io/tree/master/Android%20pictures/7.png)                                             
+![](https://github.com/philniu/philniu.github.io/tree/master/Android%20pictures/7.png)                                                
 **6. 创建一个简单地使用OPenCV的本地代码实现图片灰度化的项目。**                                         
-![](https://github.com/philniu/philniu.github.io/tree/master/Android%20pictures/8.png)                                                                   
+![](https://github.com/philniu/philniu.github.io/tree/master/Android%20pictures/8.png)                                                                               
 
 **7. 备注**                    
 后续更新，敬请期待。                
