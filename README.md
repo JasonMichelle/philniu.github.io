@@ -89,9 +89,8 @@ Window—>Preference看如下截图：
 
 **代码**   
 
-1、完成3D立方体的绘制，代码注释    
-             
-//  
+1、完成3D立方体的绘制，代码注释  
+
     package com.hust.dj3dstudy;
 
     import java.nio.ByteBuffer;
@@ -219,8 +218,7 @@ Window—>Preference看如下截图：
 }  
 
 2、主页显示 
-                                      
-    //  
+
     package com.hust.dj3dstudy;
 
     import android.app.Activity;
@@ -241,8 +239,7 @@ Window—>Preference看如下截图：
 		GLView.setRenderer(mCubeRenderer);
 		setContentView(GLView);
 	}
-
-}
+    }
 
 
 
