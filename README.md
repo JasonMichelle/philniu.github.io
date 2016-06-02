@@ -45,7 +45,7 @@ JAVA_HOME
 PATH     
 ![](https://github.com/philniu/philniu.github.io/tree/master/Android%20pictures/2.png)         
 CLASSPATH    
-![](https://github.com/philniu/philniu.github.io/tree/master/Android%20pictures/3.png)                                            
+![](https://github.com/philniu/philniu.github.io/tree/master/Android%20pictures/3.png)                                         
 Win+R，输入cmd，输入java 和 javac 检测环境是否配置成功。成功的话会出现很多输出      
 
 **2. Eclipse下载安装**     
