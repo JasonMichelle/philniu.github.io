@@ -89,22 +89,22 @@ Window—>Preference看如下截图：
 
 **代码**   
 
-1、完成3D立方体的绘制，代码注释  
+1、完成3D立方体的绘制，代码注释    
              
-//
-package com.hust.dj3dstudy;
+//  
+    package com.hust.dj3dstudy;
 
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder
-import java.nio.FloatBuffer;
+    import java.nio.ByteBuffer;
+    import java.nio.ByteOrder
+    import java.nio.FloatBuffer;
 
-import javax.microedition.khronos.egl.EGLConfig;
-import javax.microedition.khronos.opengles.GL10;
+    import javax.microedition.khronos.egl.EGLConfig;
+    import javax.microedition.khronos.opengles.GL10;
 
-import android.opengl.GLSurfaceView.Renderer;
-import android.opengl.GLU;
+    import android.opengl.GLSurfaceView.Renderer;
+    import android.opengl.GLU;
 
-public class CubeRenderer implements Renderer {
+    public class CubeRenderer implements Renderer {
 
 	//调整这个小说就可以调整这个立方体的大小。
 	float box[] = new float[] {
@@ -220,15 +220,15 @@ public class CubeRenderer implements Renderer {
 
 2、主页显示 
                                       
-//
-package com.hust.dj3dstudy;
+    //  
+    package com.hust.dj3dstudy;
 
-import android.app.Activity;
-import android.opengl.GLSurfaceView;
-import android.os.Bundle;
-import android.view.Window;
+    import android.app.Activity;
+    import android.opengl.GLSurfaceView;
+    import android.os.Bundle;
+    import android.view.Window;
 
-public class MainActivity extends Activity {
+    public class MainActivity extends Activity {
 
 	CubeRenderer mCubeRenderer; // 我们自定义的立方体Renderer
 
