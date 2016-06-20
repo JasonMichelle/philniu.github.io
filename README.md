@@ -242,6 +242,7 @@ Window—>Preference看如下截图：
     }
 
 # UPDATE4:Hand Tracking 实现    
+    这周我们主要进行了Hand Tracking这个项目环境的搭建和相关算法的实现，现将部分核心代码公布如下  
 核心代码：
 
 
