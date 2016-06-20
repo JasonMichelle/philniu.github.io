@@ -241,7 +241,139 @@ Window—>Preference看如下截图：
 	}
     }
 
+# UPDATE4:Hand Tracking 实现    
+核心代码：
 
+
+	/**
+	 * 初始化照相机视图
+	 */
+	private void initOpenCVCamera() {
+		mOpenCvCameraView = (CameraBridgeViewBase) findViewById(R.id.handtracking_activity_java_surface_view);
+		mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
+		mOpenCvCameraView.setCvCameraViewListener(this);
+		mOpenCvCameraView.setOnTouchListener(HandTrackingActivity.this);
+		mOpenCvCameraView.setFocusable(false);
+	}
+
+	//相机开始预览执行
+	public void onCameraViewStarted(int width, int height) {
+		Log.e(TAG, "-----------Widht: " + width + " Height: " + height);
+		Height = height;
+		Width = width;
+		mRgba = new Mat(height, width, CvType.CV_8UC3);
+		mHsv = new Mat(); // (height, width, CvType.CV_8UC3);
+		threshold = new Mat(); // (height, width, CvType.CV_8UC3);
+		kernel = Mat.zeros(KERNEL_SIZE, KERNEL_SIZE, CvType.CV_8UC1);
+		CONTOUR_COLOR = new Scalar(255, 0, 0);
+		mHierarchy = new Mat();
+		squares = getSquares(new Point(mRgba.width() / 2, mRgba.height() / 2),
+				(int) (Width * 20) / 1280);
+		max_range = new int[squares.length][3];
+		min_range = new int[squares.length][3];
+		for (int i = 0; i < squares.length; i++) {
+			for (int j = 0; j < 3; j++) {
+				min_range[i][j] = 256;
+			}
+		}
+	}
+
+	//相机结束预览执行
+	public void onCameraViewStopped() {
+	}
+
+	//把预览的frame转换为OpenCV里面的Mat数据格式
+	public Mat onCameraFrame(CvCameraViewFrame inputFrame) {
+		mRgba = inputFrame.rgba();
+		if (!haveRange) {
+			for (int i = 0; i < squares.length; i += 2) {
+				Core.rectangle(mRgba, squares[i], squares[i + 1], new Scalar(
+						255, 0, 0), 5);
+			}
+			Core.putText(mRgba, "Position your hand on the squares and tap",
+					new Point(mRgba.cols() * 0.25, mRgba.rows() * 0.9),
+					Core.FONT_HERSHEY_SIMPLEX, 1.0, new Scalar(255, 0, 0), 2);
+			mOutput = mRgba;
+		} else {
+			if (Width / 3 > 320)
+				Imgproc.resize(mRgba, mRgba, new Size(Width / 3, Height / 3));
+			// mRgba.convertTo(mRgba, -1, alpha, beta);
+			Imgproc.cvtColor(mRgba, mHsv, Imgproc.COLOR_RGB2HSV);
+			mOutput = null;
+			for (int i = 0; i < squares.length; i++) {
+				Core.inRange(mHsv, new Scalar(min_range[i][0], min_range[i][1],
+						min_range[i][2]), new Scalar(max_range[i][0],
+						max_range[i][1], max_range[i][2]), threshold);
+				Imgproc.GaussianBlur(threshold, threshold, new Size(11, 11), 0,
+						0);
+				if (i == 0)
+					mOutput = threshold.clone();
+				else
+					Core.add(mOutput, threshold, mOutput);
+			}
+			/*
+			 * blur：均值滤波
+			 * GaussianBlur：高斯滤波
+			 * medianBlur：中值滤波
+			 * bilateralFilter：双边滤波
+			 * */
+			Imgproc.medianBlur(mOutput, mOutput, 11);//中值滤波
+			Imgproc.dilate(mOutput, mOutput, kernel);
+			Imgproc.erode(mOutput, mOutput, kernel);
+
+			List<MatOfPoint> contours = new ArrayList<MatOfPoint>();
+
+			Imgproc.findContours(mOutput, contours, mHierarchy,
+					Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
+			// Find max contour area
+			double maxArea = 0;
+			Iterator<MatOfPoint> each = contours.iterator();
+			int i = 0, i_max = 0;
+			while (each.hasNext()) {
+				MatOfPoint wrapper = each.next();
+				double area = Imgproc.contourArea(wrapper);
+				if (area > maxArea) {
+					maxArea = area;
+					i_max = i;
+				}
+				i++;
+			}
+			Imgproc.drawContours(mRgba, contours, i_max, CONTOUR_COLOR);
+
+			if (Width / 3 > 320)
+				Imgproc.resize(mRgba, mRgba, new Size(Width, Height));
+		}
+		return mRgba;
+	}
+
+	//触摸点击事件，切换HandTracking和非HandTracking的状态切换。
+	//并且在屏幕中央绘制10个红框
+	@Override
+	public boolean onTouch(View v, MotionEvent event) {
+		if (haveRange) {
+			haveRange = false;
+			return false;
+		}
+		haveRange = true;
+		// mRgba.convertTo(mRgba, -1, alpha, beta);
+		Imgproc.cvtColor(mRgba, mHsv, Imgproc.COLOR_RGB2HSV);
+		List<Mat> channels = new ArrayList<Mat>();
+		Core.split(mHsv, channels);
+
+		for (int c = 0; c < 3; c++) {
+			Mat ch = channels.get(c);
+			for (int s = 0; s < squares.length; s += 2) {
+				Mat subMat = ch.submat((int) squares[s].y,
+						(int) squares[s + 1].y, (int) squares[s].x,
+						(int) squares[s + 1].x);
+				MinMaxLocResult result = Core.minMaxLoc(subMat);
+				min_range[s][c] = (int) result.minVal;
+				max_range[s][c] = (int) result.maxVal;
+			}
+		}
+
+		return false;
+	}
 
 
 
