@@ -375,6 +375,20 @@ Window—>Preference看如下截图：
 
 		return false;
 	}
+                            
+# UPDATE5：本次项目的最后一更  
+这周我们进行了项目最终的调试，并在Android设备上进行了最终的测试。    
+最终的Demo视频文件较大，可以点击下边链接下载：   
+http://pan.baidu.com/s/1bXTAoQ  
+这里是测试相关截图：  
+![](https://github.com/philniu/philniu.github.io/blob/master/update5images/Demo_20160620142318.JPG)
+![](https://github.com/philniu/philniu.github.io/blob/master/update5images/Demo_20160620142354.JPG)    
+源码，和最终的.apk文件可以点击下边链接下载：  
+https://github.com/philniu/philniu.github.io/tree/master/Hand%20Tracking    
+Caution! HandTracking.apk和OpenCV_2.4.11_Manager_2.20_armv7a-neon.apk都要安装，使用时，先点击openCV，再点击HandTracking！  
+不足：
+在Demo中也可以看到，要想获得好的Track效果，background一定要均匀且相对稳定，反差越大越好，鲁棒性差。  
+
 
 
 
