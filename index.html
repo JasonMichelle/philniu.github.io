@@ -76,11 +76,11 @@ a mouse.      </p>
 下载地址：<a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">http://www.oracle.com/technetwork/java/javase/downloads/index.html</a>
 环境配置，截图如下：<br>
 JAVA_HOME<br>
-<img class="img-responsive" src="AndroidPictures/1.png" alt=""><br>
+<img src="https://github.com/philniu/philniu.github.io/blob/master/AndroidPictures/1.png" alt=""><br>
 PATH<br>
-<img class="img-responsive" src="AndroidPictures/2.png" alt=""><br>
+<img src="https://github.com/philniu/philniu.github.io/blob/master/AndroidPictures/2.png" alt=""><br>
 CLASSPATH<br>
-<img class="img-responsive" src="AndroidPictures/3.png" alt=""><br>
+<img src="https://github.com/philniu/philniu.github.io/blob/master/AndroidPictures/3.png" alt=""><br>
 Win+R，输入cmd，输入java 和 javac 检测环境是否配置成功。成功的话会出现很多输出      </p>
 
 <p><strong>2. Eclipse下载安装</strong><br>
@@ -97,18 +97,18 @@ Win+R，输入cmd，输入java 和 javac 检测环境是否配置成功。成功
 <p><strong>4. Android SDK和NDK配置</strong><br>
 打开Eclipse，设置工作空间。<br>
 Window—&gt;Preference看如下截图：<br>
-<img class="img-responsive" src="AndroidPictures/4.png" alt=""><br>
-<img class="img-responsive" src="AndroidPictures/5.png" alt=""><br>                                         </p>
+<img src="https://github.com/philniu/philniu.github.io/blob/master/AndroidPictures/4.png" alt=""><br>
+<img src="https://github.com/philniu/philniu.github.io/blob/master/AndroidPictures/5.png" alt="">                                         </p>
 
 <p><strong>5. 配置OpenCV-2.4.11</strong><br>
 下载地址：<a href="http://opencv.org/downloads.html">http://opencv.org/downloads.html</a><br>
 选择相应的版本。<br>
 解压文件，然后把文件里面的一个名叫sdk的文件夹复制到工作空间。<br>
 然后，导入这个sdk项目到Eclipse作为一个library。<br>
-<img class="img-responsive" src="AndroidPictures/6.png" alt=""><br>
-<img class="img-responsive" src="AndroidPictures/7.png" alt=""><br>
+<img src="https://github.com/philniu/philniu.github.io/blob/master/AndroidPictures/6.png" alt=""><br>
+<img src="https://github.com/philniu/philniu.github.io/blob/master/AndroidPictures/7.png" alt=""><br>
 <strong>6. 创建一个简单地使用OPenCV的本地代码实现图片灰度化的项目。</strong><br>
-<img class="img-responsive" src="AndroidPictures/8.png" alt=""><br>                                                                               </p>
+<img src="https://github.com/philniu/philniu.github.io/blob/master/AndroidPictures/8.png" alt="">                                                                               </p>
 
 <p><strong>7. 备注</strong><br>
 后续更新，敬请期待。                </p>
@@ -118,10 +118,10 @@ Window—&gt;Preference看如下截图：<br>
 
 <p>打开Eclipse，创建一个项目，取名Dj3DStudy001，采用Android5.1，也就是Android API 22版本。向下兼容到Android API 14. 
 完成的效果如下图：（本来是一个动画，但是手机运行之后，录制动画太麻烦，就弄一组图算了）<br>
-<img class="img-responsive" src="update3Images/1.png" alt=""><br>
+<img src="https://github.com/philniu/philniu.github.io/tree/master/update3Images/1.png" alt="">  </p>
 
 <p><strong>项目架构截图：</strong><br>
-<img class="img-responsive" src="update3Images/2.png" alt=""><br>
+<img src="https://github.com/philniu/philniu.github.io/tree/master/update3Images/2.png" alt="">  </p>
 
 <p><strong>代码</strong>   </p>
 
@@ -279,6 +279,160 @@ protected void onCreate(Bundle savedInstanceState) {
 }
 }
 </code></pre>
+
+<h1>
+<a id="update4hand-tracking-实现" class="anchor" href="#update4hand-tracking-%E5%AE%9E%E7%8E%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>UPDATE4:Hand Tracking 实现</h1>
+
+<pre><code>这周我们主要进行了Hand Tracking这个项目环境的搭建和相关算法的实现，现将部分核心代码公布如下  
+</code></pre>
+
+<p>核心代码：</p>
+
+<pre><code>/**
+ * 初始化照相机视图
+ */
+private void initOpenCVCamera() {
+    mOpenCvCameraView = (CameraBridgeViewBase) findViewById(R.id.handtracking_activity_java_surface_view);
+    mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
+    mOpenCvCameraView.setCvCameraViewListener(this);
+    mOpenCvCameraView.setOnTouchListener(HandTrackingActivity.this);
+    mOpenCvCameraView.setFocusable(false);
+}
+
+//相机开始预览执行
+public void onCameraViewStarted(int width, int height) {
+    Log.e(TAG, "-----------Widht: " + width + " Height: " + height);
+    Height = height;
+    Width = width;
+    mRgba = new Mat(height, width, CvType.CV_8UC3);
+    mHsv = new Mat(); // (height, width, CvType.CV_8UC3);
+    threshold = new Mat(); // (height, width, CvType.CV_8UC3);
+    kernel = Mat.zeros(KERNEL_SIZE, KERNEL_SIZE, CvType.CV_8UC1);
+    CONTOUR_COLOR = new Scalar(255, 0, 0);
+    mHierarchy = new Mat();
+    squares = getSquares(new Point(mRgba.width() / 2, mRgba.height() / 2),
+            (int) (Width * 20) / 1280);
+    max_range = new int[squares.length][3];
+    min_range = new int[squares.length][3];
+    for (int i = 0; i &lt; squares.length; i++) {
+        for (int j = 0; j &lt; 3; j++) {
+            min_range[i][j] = 256;
+        }
+    }
+}
+
+//相机结束预览执行
+public void onCameraViewStopped() {
+}
+
+//把预览的frame转换为OpenCV里面的Mat数据格式
+public Mat onCameraFrame(CvCameraViewFrame inputFrame) {
+    mRgba = inputFrame.rgba();
+    if (!haveRange) {
+        for (int i = 0; i &lt; squares.length; i += 2) {
+            Core.rectangle(mRgba, squares[i], squares[i + 1], new Scalar(
+                    255, 0, 0), 5);
+        }
+        Core.putText(mRgba, "Position your hand on the squares and tap",
+                new Point(mRgba.cols() * 0.25, mRgba.rows() * 0.9),
+                Core.FONT_HERSHEY_SIMPLEX, 1.0, new Scalar(255, 0, 0), 2);
+        mOutput = mRgba;
+    } else {
+        if (Width / 3 &gt; 320)
+            Imgproc.resize(mRgba, mRgba, new Size(Width / 3, Height / 3));
+        // mRgba.convertTo(mRgba, -1, alpha, beta);
+        Imgproc.cvtColor(mRgba, mHsv, Imgproc.COLOR_RGB2HSV);
+        mOutput = null;
+        for (int i = 0; i &lt; squares.length; i++) {
+            Core.inRange(mHsv, new Scalar(min_range[i][0], min_range[i][1],
+                    min_range[i][2]), new Scalar(max_range[i][0],
+                    max_range[i][1], max_range[i][2]), threshold);
+            Imgproc.GaussianBlur(threshold, threshold, new Size(11, 11), 0,
+                    0);
+            if (i == 0)
+                mOutput = threshold.clone();
+            else
+                Core.add(mOutput, threshold, mOutput);
+        }
+        /*
+         * blur：均值滤波
+         * GaussianBlur：高斯滤波
+         * medianBlur：中值滤波
+         * bilateralFilter：双边滤波
+         * */
+        Imgproc.medianBlur(mOutput, mOutput, 11);//中值滤波
+        Imgproc.dilate(mOutput, mOutput, kernel);
+        Imgproc.erode(mOutput, mOutput, kernel);
+
+        List&lt;MatOfPoint&gt; contours = new ArrayList&lt;MatOfPoint&gt;();
+
+        Imgproc.findContours(mOutput, contours, mHierarchy,
+                Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
+        // Find max contour area
+        double maxArea = 0;
+        Iterator&lt;MatOfPoint&gt; each = contours.iterator();
+        int i = 0, i_max = 0;
+        while (each.hasNext()) {
+            MatOfPoint wrapper = each.next();
+            double area = Imgproc.contourArea(wrapper);
+            if (area &gt; maxArea) {
+                maxArea = area;
+                i_max = i;
+            }
+            i++;
+        }
+        Imgproc.drawContours(mRgba, contours, i_max, CONTOUR_COLOR);
+
+        if (Width / 3 &gt; 320)
+            Imgproc.resize(mRgba, mRgba, new Size(Width, Height));
+    }
+    return mRgba;
+}
+
+//触摸点击事件，切换HandTracking和非HandTracking的状态切换。
+//并且在屏幕中央绘制10个红框
+@Override
+public boolean onTouch(View v, MotionEvent event) {
+    if (haveRange) {
+        haveRange = false;
+        return false;
+    }
+    haveRange = true;
+    // mRgba.convertTo(mRgba, -1, alpha, beta);
+    Imgproc.cvtColor(mRgba, mHsv, Imgproc.COLOR_RGB2HSV);
+    List&lt;Mat&gt; channels = new ArrayList&lt;Mat&gt;();
+    Core.split(mHsv, channels);
+
+    for (int c = 0; c &lt; 3; c++) {
+        Mat ch = channels.get(c);
+        for (int s = 0; s &lt; squares.length; s += 2) {
+            Mat subMat = ch.submat((int) squares[s].y,
+                    (int) squares[s + 1].y, (int) squares[s].x,
+                    (int) squares[s + 1].x);
+            MinMaxLocResult result = Core.minMaxLoc(subMat);
+            min_range[s][c] = (int) result.minVal;
+            max_range[s][c] = (int) result.maxVal;
+        }
+    }
+
+    return false;
+}
+</code></pre>
+
+<h1>
+<a id="update5本次项目的最后一更" class="anchor" href="#update5%E6%9C%AC%E6%AC%A1%E9%A1%B9%E7%9B%AE%E7%9A%84%E6%9C%80%E5%90%8E%E4%B8%80%E6%9B%B4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>UPDATE5：本次项目的最后一更</h1>
+
+<p>这周我们进行了项目最终的调试，并在Android设备上进行了最终的测试。<br>
+最终的Demo视频文件较大，可以点击下边链接下载：<br>
+<a href="http://pan.baidu.com/s/1bXTAoQ">http://pan.baidu.com/s/1bXTAoQ</a><br>
+这里是测试相关截图：<br>
+<img src="https://github.com/philniu/philniu.github.io/blob/master/update5images/Demo_20160620142318.JPG" alt="">
+<img src="https://github.com/philniu/philniu.github.io/blob/master/update5images/Demo_20160620142354.JPG" alt=""><br>
+源码，和最终的.apk文件可以点击下边链接下载：<br>
+<a href="https://github.com/philniu/philniu.github.io/tree/master/Hand%20Tracking">https://github.com/philniu/philniu.github.io/tree/master/Hand%20Tracking</a><br>
+Caution! HandTracking.apk和OpenCV_2.4.11_Manager_2.20_armv7a-neon.apk都要安装，使用时，先点击openCV，再点击HandTracking！<br>
+不足：<br>
+在Demo中也可以看到，要想获得好的Track效果，background一定要均匀且相对稳定，反差越大越好，鲁棒性差。  </p>
 
       <footer class="site-footer">
 
